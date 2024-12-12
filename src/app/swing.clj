@@ -109,7 +109,7 @@
   []
   (when @updater
     (.stop @updater)
-    (reset! nil)))
+    (reset! updater nil)))
 
 (defn create-updater
   []

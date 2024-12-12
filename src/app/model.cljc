@@ -1,12 +1,14 @@
 (ns app.model)
 
-(def window-width 1024)
-(def window-height 768)
+;; Change this to scale the UI (for 4k screens change to 2)
+(def scale 1)
+(def window-width (* 1024 scale))
+(def window-height (* 768 scale))
 
-(def min-radius 10)
-(def max-radius 40)
+(def min-radius (* 10 scale))
+(def max-radius (* 40 scale))
 (def decrease-radius 0.8)
-(def kill-radius 5)
+(def kill-radius (* 5 scale))
 
 (def objects
   (atom [#_{:type :circle :x 100 :y 100 :color "red" :radius 30}]))
@@ -83,7 +85,9 @@
   (swap! objects assoc-in [1 :color] "cyan")
   (swap! objects conj {:type :circle :x 200 :y 200 :color "red" :radius 30})
   
-  (doseq [_ (range 200)]
+  (swap! objects conj (make-random-object))
+
+  (doseq [_ (range 50)]
    (swap! objects conj (make-random-object))) 
   (update-state!)
 
